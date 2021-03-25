@@ -4,6 +4,9 @@
 // output: ['is', 'a', 'split', 'sentence.', 'This']
 
 function rearranger(arr) {
+    let arg1 = arr.shift()
+    arr.push(arg1)
+    return arr
 }
 
 
@@ -16,6 +19,8 @@ function rearranger(arr) {
 // output: 42
 
 function largestNum(arr) {
+    arr.sort()
+    return arr.pop()
 }
 
 
@@ -28,6 +33,8 @@ function largestNum(arr) {
 // output: [16, 8, 4, 28]
 
 function elemsTimesLength(arr) {
+    let newArr = arr.map(x => x * arr.length)
+    return newArr
 }
 
 
@@ -35,7 +42,8 @@ function elemsTimesLength(arr) {
 
 
 
-//4. Flights from Boise. Write a function that will use the following data to return the cost of flights from boise to a neighboring city, by default return the standard cost unless firstClass is set to true
+//4. Flights from Boise. Write a function that will use the following data to return the cost of flights 
+// from boise to a neighboring city, by default return the standard cost unless firstClass is set to true
 
 let flights = [{
     from: 'BOI',
@@ -63,6 +71,11 @@ let flights = [{
 
 function flightCost(destination, firstClass) {
     //***hint: use the find method***
+    let dest = flights.find(flight => flight.to == destination.toUpperCase())
+    if (firstClass) {
+        return dest.prices.firstClass
+    } else
+        return dest.prices.standard
 
 }
 
@@ -70,7 +83,9 @@ function flightCost(destination, firstClass) {
 // ------------------------------------------
 
 
-// 5. Given a number, return the corresponding user object from the staff array that has the given number as the value of their id property. If no user is found, return an object with an error property and value of "No user with that id."
+// 5. Given a number, return the corresponding user object from the staff array that
+// has the given number as the value of their id property.If no user is found, return an
+// object with an error property and value of "No user with that id."
 // Example:
 // input: 17
 // output: {id: 17, name: 'St. MaryLou de la Playa Carmen'}
@@ -84,6 +99,11 @@ let staff = [{ id: 1, name: 'Jon' }, { id: 2, name: 'Yuli' }, { id: 21, name: 'P
 { id: 881, name: 'Paul' }, { id: 0, name: 'Jon' }, { id: 999, name: 'Timma' }]
 
 function findById(id) {
+    let employee = staff.find(emp => emp.id == id)
+    if (employee) {
+        return employee
+    } else
+        return { error: "No user with that id." }
 
 }
 
@@ -91,7 +111,10 @@ function findById(id) {
 // ------------------------------------------
 
 
-// 6. Write a function that accepts a name argument and will loop over theBand members and return the band member's name and the instrument that he/she plays. Use string concatenation or interpolation to return a sentence with the following structure: "[band-members-name] is in the band and plays the [band-members-instrument]".
+// 6. Write a function that accepts a name argument and will loop over theBand members and 
+// return the band member's name and the instrument that he/she plays. Use string 
+// concatenation or interpolation to return a sentence with the following structure:
+// "[band-members-name] is in the band and plays the [band-members-instrument]".
 // Example:
 // input: 'Johnny P'
 // output: "Johnny P is in the band and plays the sax"
@@ -111,4 +134,6 @@ let theBand = {
 }
 
 function bandMemberDetails(name) {
+    let member = theBand.members.find(player => player.name.includes(name))
+    return `${member.name} is in the band and plays the ${member.instrument}`
 }
